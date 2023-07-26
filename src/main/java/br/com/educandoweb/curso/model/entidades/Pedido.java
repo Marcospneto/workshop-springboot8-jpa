@@ -2,6 +2,8 @@ package br.com.educandoweb.curso.model.entidades;
 
 import java.io.Serializable;
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -12,6 +14,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 
 @Entity
 public class Pedido implements Serializable {
@@ -28,6 +31,8 @@ public class Pedido implements Serializable {
 	@ManyToOne
 	@JoinColumn(name = "cliente_id")
 	private Usuario cliente;
+	@OneToMany(mappedBy = "id.pedido")
+	private Set<PedidoItem> items = new HashSet<>();
 
 	public Pedido() {
 
@@ -75,6 +80,9 @@ public class Pedido implements Serializable {
 		this.cliente = cliente;
 	}
 
+	public Set<PedidoItem> getItems(){
+		return items;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

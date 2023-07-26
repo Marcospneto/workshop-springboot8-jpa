@@ -1,7 +1,6 @@
 package br.com.educandoweb.curso.config;
 
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import br.com.educandoweb.curso.model.entidades.Categoria;
 import br.com.educandoweb.curso.model.entidades.Pedido;
+import br.com.educandoweb.curso.model.entidades.PedidoItem;
 import br.com.educandoweb.curso.model.entidades.Produto;
 import br.com.educandoweb.curso.model.entidades.Usuario;
 import br.com.educandoweb.curso.model.entidades.enums.PedidoStatus;
 import br.com.educandoweb.curso.model.repositorios.CategoriaRepositorio;
+import br.com.educandoweb.curso.model.repositorios.PedidoItemRepositorio;
 import br.com.educandoweb.curso.model.repositorios.PedidoRepositorio;
 import br.com.educandoweb.curso.model.repositorios.ProdutoRepositorio;
 import br.com.educandoweb.curso.model.repositorios.UsuarioRepositorio;
@@ -30,6 +31,8 @@ public class TesteConfig implements CommandLineRunner{
 	private CategoriaRepositorio categoriaRepositorio;
 	@Autowired
 	private ProdutoRepositorio produtoRepositorio;
+	@Autowired
+	private PedidoItemRepositorio pedidoItemRepositorio;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -57,6 +60,11 @@ public class TesteConfig implements CommandLineRunner{
 		Pedido p1 = new Pedido(null, Instant.parse("2023-07-20T19:53:22Z"), PedidoStatus.PAGO, u1);
 		Pedido p2 = new Pedido(null, Instant.parse("2023-05-03T09:47:11Z"), PedidoStatus.CANCELADO, u2);
 		pedidoRepositorio.saveAll(Arrays.asList(p1, p2));
+		
+		PedidoItem pi1 = new PedidoItem(p1, produto3, 1, produto3.getPreco());
+		PedidoItem pi2 = new PedidoItem(p1, produto2, 2, produto2.getPreco());
+		PedidoItem pi3 = new PedidoItem(p2, produto1, 1, produto1.getPreco());
+		pedidoItemRepositorio.saveAll(Arrays.asList(pi1, pi2, pi3));
 		
 		
 	}

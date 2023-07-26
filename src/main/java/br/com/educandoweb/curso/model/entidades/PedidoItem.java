@@ -2,6 +2,8 @@ package br.com.educandoweb.curso.model.entidades;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.educandoweb.curso.model.entidades.pk.PedidoItemPK;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
@@ -12,7 +14,7 @@ public class PedidoItem implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@EmbeddedId
-	private PedidoItemPK id;
+	private PedidoItemPK id = new PedidoItemPK();
 
 	private Integer quantidade;
 	private Double preco;
@@ -28,7 +30,7 @@ public class PedidoItem implements Serializable {
 		this.quantidade = quantidade;
 		this.preco = preco;
 	}
-
+	@JsonIgnore
 	public Pedido getPedido() {
 		return id.getPedido();
 	}
