@@ -8,6 +8,7 @@ import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 import br.com.educandoweb.curso.model.entidades.enums.PedidoStatus;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -15,6 +16,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 
 @Entity
 public class Pedido implements Serializable {
@@ -25,7 +27,7 @@ public class Pedido implements Serializable {
 	private Long id;
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
 	private Instant momento;
-	
+
 	private Integer pedidoStatus;
 
 	@ManyToOne
@@ -33,6 +35,8 @@ public class Pedido implements Serializable {
 	private Usuario cliente;
 	@OneToMany(mappedBy = "id.pedido")
 	private Set<PedidoItem> items = new HashSet<>();
+	@OneToOne(mappedBy = "pedido", cascade = CascadeType.ALL)
+	private Pagamento pagamento;
 
 	public Pedido() {
 
@@ -68,9 +72,9 @@ public class Pedido implements Serializable {
 
 	public void setPedidoStatus(PedidoStatus pedidoStatus) {
 		if (pedidoStatus != null) {
-		this.pedidoStatus = pedidoStatus.getCode();
+			this.pedidoStatus = pedidoStatus.getCode();
 		}
-		}
+	}
 
 	public Usuario getCliente() {
 		return cliente;
@@ -80,9 +84,18 @@ public class Pedido implements Serializable {
 		this.cliente = cliente;
 	}
 
-	public Set<PedidoItem> getItems(){
+	public Pagamento getPagamento() {
+		return pagamento;
+	}
+
+	public void setPagamento(Pagamento pagamento) {
+		this.pagamento = pagamento;
+	}
+
+	public Set<PedidoItem> getItems() {
 		return items;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
