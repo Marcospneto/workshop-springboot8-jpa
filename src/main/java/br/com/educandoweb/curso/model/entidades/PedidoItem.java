@@ -8,6 +8,7 @@ import br.com.educandoweb.curso.model.entidades.pk.PedidoItemPK;
 import jakarta.persistence.EmbeddedId;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
+
 @Entity
 @Table(name = "tb_pedido_item")
 public class PedidoItem implements Serializable {
@@ -30,6 +31,7 @@ public class PedidoItem implements Serializable {
 		this.quantidade = quantidade;
 		this.preco = preco;
 	}
+
 	@JsonIgnore
 	public Pedido getPedido() {
 		return id.getPedido();
