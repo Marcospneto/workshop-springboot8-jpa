@@ -13,18 +13,22 @@ import br.com.educandoweb.curso.model.repositorios.UsuarioRepositorio;
 public class UsuarioServico {
 	@Autowired
 	private UsuarioRepositorio repositorio;
-	
-	public List<Usuario> findAll(){
+
+	public List<Usuario> findAll() {
 		return repositorio.findAll();
 	}
-	
+
 	public Usuario findById(Long id) {
 		Optional<Usuario> obj = repositorio.findById(id);
 		return obj.get();
 	}
-	
-	public Usuario insert (Usuario obj) {
+
+	public Usuario insert(Usuario obj) {
 		return repositorio.save(obj);
+	}
+
+	public void delete(Long id) {
+		repositorio.deleteById(id);
 	}
 
 }

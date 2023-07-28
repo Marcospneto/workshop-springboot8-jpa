@@ -22,5 +22,13 @@ public class ProdutoServico {
 		Optional<Produto> obj = repositorio.findById(id);
 		return obj.get();
 	}
+	
+	public Produto insert(Produto obj) {
+		return repositorio.save(obj);
+	}
+	
+	public void delete (Long id) {
+		repositorio.deleteById(id);
+	}
 
 }

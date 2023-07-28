@@ -23,4 +23,11 @@ public class CategoriaServico {
 		return obj.get();
 	}
 
+	public Categoria insert (Categoria obj) {
+		return repositorio.save(obj);
+	}
+	
+	public void delete (Long id) {
+		repositorio.deleteById(id);
+	}
 }

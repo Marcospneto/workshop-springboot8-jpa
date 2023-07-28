@@ -13,14 +13,22 @@ import br.com.educandoweb.curso.model.repositorios.PedidoRepositorio;
 public class PedidoServico {
 	@Autowired
 	private PedidoRepositorio repositorio;
-	
-	public List<Pedido> findAll(){
+
+	public List<Pedido> findAll() {
 		return repositorio.findAll();
 	}
-	
+
 	public Pedido findById(Long id) {
 		Optional<Pedido> obj = repositorio.findById(id);
 		return obj.get();
+	}
+
+	public Pedido insert(Pedido obj) {
+		return repositorio.save(obj);
+	}
+
+	public void delete(Long id) {
+		repositorio.deleteById(id);
 	}
 
 }
