@@ -3,6 +3,8 @@ package br.com.educandoweb.curso.model.entidades;
 import java.io.Serializable;
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -20,6 +22,7 @@ public class Pagamento implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private Instant momento;
+	@JsonIgnore
 	@OneToOne
 	@MapsId
 	private Pedido pedido;
