@@ -30,4 +30,15 @@ public class CategoriaServico {
 	public void delete (Long id) {
 		repositorio.deleteById(id);
 	}
+	
+	public Categoria update (Long id, Categoria obj) {
+		Categoria entity = repositorio.getReferenceById(id);
+		updateData(entity, obj);
+		return repositorio.save(entity);
+	}
+
+	private void updateData(Categoria entity, Categoria obj) {
+		entity.setNome(obj.getNome());
+		
+	}
 }

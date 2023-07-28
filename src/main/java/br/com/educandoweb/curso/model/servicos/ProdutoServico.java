@@ -30,5 +30,18 @@ public class ProdutoServico {
 	public void delete (Long id) {
 		repositorio.deleteById(id);
 	}
+	
+	public Produto update(Long id, Produto obj) {
+		Produto entity = repositorio.getReferenceById(id);
+		updateData(entity, obj);
+		return repositorio.save(entity);
+	}
+
+	private void updateData(Produto entity, Produto obj) {
+		entity.setNome(obj.getNome());
+		entity.setDescricao(obj.getDescricao());
+		entity.setPreco(obj.getPreco());
+		
+	}
 
 }

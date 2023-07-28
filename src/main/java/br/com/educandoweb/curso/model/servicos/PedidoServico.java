@@ -30,5 +30,19 @@ public class PedidoServico {
 	public void delete(Long id) {
 		repositorio.deleteById(id);
 	}
+	
+	public Pedido update(Long id, Pedido obj) {
+		Pedido entity = repositorio.getReferenceById(id);
+		updateData(entity, obj);
+		return repositorio.save(entity);
+	}
+
+	private void updateData(Pedido entity, Pedido obj) {
+		entity.setCliente(obj.getCliente());
+		entity.setMomento(obj.getMomento());
+		entity.setPagamento(obj.getPagamento());
+		entity.setPedidoStatus(obj.getPedidoStatus());
+		
+	}
 
 }
